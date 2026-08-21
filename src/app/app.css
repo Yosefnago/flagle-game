@@ -1,6 +1,9 @@
 :host {
   display: block;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 * , *::before, *::after {
@@ -24,6 +27,9 @@
 }
 
 html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   min-height: 100%;
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
@@ -36,6 +42,9 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 0 0 60px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 header {
@@ -408,8 +417,32 @@ main {
 }
 
 @media (max-width: 480px) {
-  .logo { font-size: 1.2rem; }
-  .stat-val { font-size: 0.95rem; }
+  header {
+    padding: 12px 14px 10px;
+  }
+  .logo {
+    font-size: 1.15rem;
+  }
+  .stats-bar {
+    gap: 8px;
+  }
+  .stat {
+    min-width: 42px;
+  }
+  .stat-val {
+    font-size: 0.9rem;
+  }
+  .stat-lbl {
+    font-size: 0.55rem;
+  }
+  .filter-wrap {
+    padding: 10px 14px 0;
+    gap: 6px;
+  }
+  main {
+    padding: 14px 14px 0;
+    gap: 16px;
+  }
   .filter-btn { font-size: 0.68rem; padding: 5px 10px; }
   .guess-bar-wrap { display: none; }
   .flag-grid {
@@ -418,9 +451,14 @@ main {
 }
 
 @media (max-width: 360px) {
-  header { padding: 14px 12px 10px; }
-  main { padding: 14px 12px 0; }
-  .filter-wrap { padding: 10px 12px 0; }
+  header { padding: 10px 8px 8px; }
+  .logo { font-size: 1rem; }
+  .stats-bar { gap: 6px; }
+  .stat { min-width: 38px; }
+  .stat-val { font-size: 0.82rem; }
+  .stat-lbl { font-size: 0.5rem; }
+  main { padding: 12px 8px 0; }
+  .filter-wrap { padding: 8px 8px 0; }
   .flag-grid {
     max-width: 240px; /* Small screen devices */
   }

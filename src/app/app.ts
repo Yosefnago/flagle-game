@@ -260,13 +260,9 @@ export class App implements OnInit {
     }
 
     const matches = this.COUNTRIES.filter((country) =>
-      this.normalize(country.n).includes(normalizedValue)
+      this.normalize(country.n).startsWith(normalizedValue)
     )
-      .sort((a, b) => {
-        const aIndex = this.normalize(a.n).indexOf(normalizedValue);
-        const bIndex = this.normalize(b.n).indexOf(normalizedValue);
-        return aIndex - bIndex || a.n.localeCompare(b.n);
-      })
+      .sort((a, b) => a.n.localeCompare(b.n))
       .slice(0, 8);
 
     if (!matches.length) {

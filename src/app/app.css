@@ -1,12 +1,8 @@
 :host {
   display: block;
-  width: 100%;
-  max-width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
-* , *::before, *::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -27,29 +23,24 @@
 }
 
 html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  min-height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
-  overscroll-behavior: none;
 }
 
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 0 60px;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
 }
 
 header {
   width: 100%;
-  max-width: 680px;
+  max-width: 480px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -98,7 +89,8 @@ header {
 
 .filter-wrap {
   width: 100%;
-  max-width: 680px;
+  max-width: 480px;
+  margin: 0 auto;
   padding: 14px 20px 0;
   display: flex;
   gap: 8px;
@@ -131,7 +123,8 @@ header {
 
 main {
   width: 100%;
-  max-width: 680px;
+  max-width: 480px;
+  margin: 0 auto;
   padding: 20px 20px 0;
   display: flex;
   flex-direction: column;
@@ -149,6 +142,7 @@ main {
   border: 2px solid var(--border);
   box-shadow: 0 8px 40px rgba(79, 110, 247, 0.1);
   background: #111;
+  flex-shrink: 0;
 }
 
 #flagImg {
@@ -174,45 +168,29 @@ main {
 
 .tile-cover[data-col='0'] { left: 0; }
 .tile-cover[data-col='1'] { left: calc(100% / 3); }
-.tile-cover[data-col='2'] { 
-  left: calc(200% / 3); 
-  width: calc(100% / 3 + 2px); /* eliminate sub-pixel gap on the right */
-}
+.tile-cover[data-col='2'] { left: calc(200% / 3); }
 .tile-cover[data-row='0'] { top: 0; }
-.tile-cover[data-row='1'] { 
-  top: 50%; 
-  height: calc(50% + 2px); /* eliminate sub-pixel gap on the bottom */
-}
+.tile-cover[data-row='1'] { top: 50%; }
+
 .tile-cover.revealed {
   opacity: 0;
   transform: scale(0.9);
   pointer-events: none;
 }
 
-.tile-icon {
-  font-size: 1.4rem;
-  opacity: 0.12;
-  animation: pulse 2.4s ease-in-out infinite;
-  user-select: none;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.08; }
-  50% { opacity: 0.18; }
-}
-
 .autocomplete-wrap {
   position: relative;
-  z-index: 50; /* ensure suggestions float above the guess list elements below */
+  z-index: 200;
+  width: 100%;
 }
 
 .input-row {
   display: flex;
+  gap: 8px;
 }
 
 .country-input {
   flex: 1;
-  width: 100%;
   padding: 12px 16px;
   border-radius: var(--radius-sm);
   border: 2px solid var(--border);
@@ -227,10 +205,6 @@ main {
 
 .country-input:focus {
   border-color: var(--accent);
-}
-
-.country-input::placeholder {
-  color: var(--muted);
 }
 
 .country-input:disabled {
@@ -257,20 +231,25 @@ main {
 
 .ac-list {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
   right: 0;
   background: var(--surface2);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
-  z-index: 100;
-  max-height: 210px;
+  z-index: 9999;
+  max-height: 150px;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
   display: none;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
 }
 
-.ac-list.open { display: block; }
+.ac-list.open { 
+  display: block; 
+}
+
 .ac-list::-webkit-scrollbar { width: 4px; }
 .ac-list::-webkit-scrollbar-thumb {
   background: var(--border);
@@ -287,6 +266,7 @@ main {
 }
 
 .ac-item:hover, .ac-item.kbfocus { background: var(--border); }
+
 .ac-item strong {
   color: var(--accent);
   font-weight: 700;
@@ -306,6 +286,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding-bottom: 20px;
 }
 
 .guess-item {
@@ -331,29 +312,18 @@ main {
 
 .guess-flag { font-size: 1.2rem; flex-shrink: 0; }
 .guess-name { flex: 1; font-size: 0.8rem; font-weight: 600; }
+
 .guess-meta {
   display: flex;
   align-items: center;
   gap: 6px;
 }
+
 .guess-dist {
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--muted);
   white-space: nowrap;
-}
-.guess-arrow { font-size: 0.9rem; line-height: 1; }
-.guess-bar-wrap {
-  width: 45px;
-  height: 4px;
-  background: var(--surface2);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.guess-bar {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.5s ease;
 }
 
 .result-card {
@@ -366,6 +336,7 @@ main {
   background: var(--surface);
   border: 1.5px solid var(--border);
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .result-card.visible {
@@ -373,9 +344,8 @@ main {
   animation: slideIn 0.4s ease;
 }
 
-.result-emoji { font-size: 2.2rem; }
 .result-title { font-size: 1rem; font-weight: 800; }
-.result-sub { font-size: 0.8rem; color: var(--muted); }
+
 .next-btn {
   padding: 10px 24px;
   border-radius: var(--radius-sm);
@@ -389,6 +359,7 @@ main {
   transition: opacity 0.15s, transform 0.1s;
   margin-top: 4px;
 }
+
 .next-btn:hover { opacity: 0.9; }
 .next-btn:active { transform: scale(0.97); }
 
@@ -415,58 +386,4 @@ main {
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-}
-
-@media (max-width: 800px) {
-  .flag-grid {
-    max-width: 310px; /* Tablet view: fits perfectly on Tab S6 Lite */
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    padding: 12px 14px 10px;
-  }
-  .logo {
-    font-size: 1.15rem;
-  }
-  .stats-bar {
-    gap: 8px;
-  }
-  .stat {
-    min-width: 42px;
-  }
-  .stat-val {
-    font-size: 0.9rem;
-  }
-  .stat-lbl {
-    font-size: 0.55rem;
-  }
-  .filter-wrap {
-    padding: 10px 14px 0;
-    gap: 6px;
-  }
-  main {
-    padding: 14px 14px 0;
-    gap: 16px;
-  }
-  .filter-btn { font-size: 0.68rem; padding: 5px 10px; }
-  .guess-bar-wrap { display: none; }
-  .flag-grid {
-    max-width: 270px; /* Smartphone view: compact size on Galaxy S21 Ultra and iPhone 14 Pro Max */
-  }
-}
-
-@media (max-width: 360px) {
-  header { padding: 10px 8px 8px; }
-  .logo { font-size: 1rem; }
-  .stats-bar { gap: 6px; }
-  .stat { min-width: 38px; }
-  .stat-val { font-size: 0.82rem; }
-  .stat-lbl { font-size: 0.5rem; }
-  main { padding: 12px 8px 0; }
-  .filter-wrap { padding: 8px 8px 0; }
-  .flag-grid {
-    max-width: 240px; /* Small screen devices */
-  }
 }

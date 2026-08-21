@@ -52,6 +52,13 @@
         (keydown.escape)="closeAC()"
         (blur)="onInputBlur()"
       />
+      <button
+        type="button"
+        class="guess-btn"
+        [disabled]="G.done"
+        (click)="submitGuess()">
+        Guess
+      </button>
     </div>
 
     @if (filteredCountries.length) {
@@ -61,7 +68,7 @@
             class="ac-item"
             [class.kbfocus]="G.acIdx === idx"
             [attr.data-name]="country.n"
-            (click)="selectCountry(country)">
+            (mousedown)="selectCountry(country)">
             <span>{{ country.n }}</span>
           </div>
         }

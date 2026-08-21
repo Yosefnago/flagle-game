@@ -50,7 +50,7 @@ export class App implements OnInit {
   private deg2rad(d: number): number {
     return (d * Math.PI) / 180;
   }
-  
+
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event): void {
     const target = event.target as HTMLElement;
@@ -264,12 +264,14 @@ export class App implements OnInit {
 
   onInputFocus(): void {
     if (!this.countryInput.trim()) {
-      const pool = [...this.getPool()];
+      const pool = [...this.COUNTRIES];
+      
       for (let i = pool.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [pool[i], pool[j]] = [pool[j], pool[i]];
       }
-      this.filteredCountries = pool.slice(0, 15);
+      
+      this.filteredCountries = pool;
       this.G.acIdx = -1;
     }
   }

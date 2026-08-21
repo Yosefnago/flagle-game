@@ -46,19 +46,13 @@
         spellcheck="false"
         [value]="countryInput"
         (input)="onCountryInput($any($event.target).value)"
+        (focus)="onInputFocus()"
         (keydown.enter)="submitGuess()"
         (keydown.arrowdown)="acNav(1)"
         (keydown.arrowup)="acNav(-1)"
         (keydown.escape)="closeAC()"
         (blur)="onInputBlur()"
       />
-      <button
-        type="button"
-        class="guess-btn"
-        [disabled]="G.done"
-        (click)="submitGuess()">
-        Guess
-      </button>
     </div>
 
     @if (filteredCountries.length) {
@@ -79,7 +73,7 @@
   @if (G.guesses.length) {
     <div class="guess-list" id="guessList">
       <div class="guess-header">Guesses ({{ G.guesses.length }}/{{ MAX_GUESS }})</div>
-      @for (guess of G.guesses.slice().reverse(); track guess.c.n) {
+      @for (guess of G.guesses; track guess.c.n) {
         <div class="guess-item" [class.correct]="guess.correct">
           @if (!guess.correct) {
             <span class="guess-flag">{{ guess.c.e }}</span>

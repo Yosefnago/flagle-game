@@ -232,7 +232,11 @@ export class App implements OnInit {
 
   onCountryInput(value: string): void {
     this.countryInput = value;
-    this.buildAC(value);
+    if (!value.trim()) {
+      this.onInputFocus();
+    } else {
+      this.buildAC(value);
+    }
   }
 
   selectCountry(country: Country): void {
@@ -251,19 +255,40 @@ export class App implements OnInit {
     setTimeout(() => this.closeAC(), 160);
   }
 
+  onInputFocus(): void {
+    if (!this.countryInput.trim()) {
+      const pool = [...this.getPool()];
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      this.filteredCountries = pool.slice(0, 15);
+      this.G.acIdx = -1;
+    }
+  }
+
   private buildAC(value: string): void {
     const normalizedValue = this.normalize(value);
 
     if (!normalizedValue) {
-      this.closeAC();
+      this.onInputFocus();
       return;
     }
 
-    const matches = this.COUNTRIES.filter((country) =>
+    const pool = this.COUNTRIES;
+
+    // 1. Exact or prefix matches on full name
+    const prefixMatches = pool.filter((country) =>
       this.normalize(country.n).startsWith(normalizedValue)
-    )
-      .sort((a, b) => a.n.localeCompare(b.n))
-      .slice(0, 8);
+    ).sort((a, b) => a.n.localeCompare(b.n));
+
+    // 2. Word-start matches or substring matches
+    const substringMatches = pool.filter((country) => {
+      const normName = this.normalize(country.n);
+      return !normName.startsWith(normalizedValue) && normName.includes(normalizedValue);
+    }).sort((a, b) => a.n.localeCompare(b.n));
+
+    const matches = [...prefixMatches, ...substringMatches];
 
     if (!matches.length) {
       this.closeAC();

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1787327481694,
+  "timestamp": 1787328145132,
   "index": "/flagle-game/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/flagle-game/favicon.ico",
         "/flagle-game/index.html",
-        "/flagle-game/main-PQN5ZNPQ.js",
+        "/flagle-game/main-YS2R7QRX.js",
         "/flagle-game/manifest.webmanifest",
         "/flagle-game/styles-5INURTSO.css"
       ],
@@ -50,8 +50,8 @@
     "/flagle-game/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/flagle-game/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/flagle-game/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/flagle-game/index.html": "997231f6193eb8bd5e84ee5cfe67744b058b95c0",
-    "/flagle-game/main-PQN5ZNPQ.js": "c5c2d52a111acecf8399bb790ec299da64bce463",
+    "/flagle-game/index.html": "df408d5b71a070bbe167ca83f02903036b218d4c",
+    "/flagle-game/main-YS2R7QRX.js": "82bfdaee4f32c3a4a2aa1ae469b2333292688b03",
     "/flagle-game/manifest.webmanifest": "f745511aae54f51b7f6918709b80b6e10fce356a",
     "/flagle-game/styles-5INURTSO.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
   },

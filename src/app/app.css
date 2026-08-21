@@ -401,15 +401,27 @@ main {
   transform: translateX(-50%) translateY(0);
 }
 
+@media (max-width: 800px) {
+  .flag-grid {
+    max-width: 310px; /* Tablet view: fits perfectly on Tab S6 Lite */
+  }
+}
+
 @media (max-width: 480px) {
   .logo { font-size: 1.2rem; }
   .stat-val { font-size: 0.95rem; }
   .filter-btn { font-size: 0.68rem; padding: 5px 10px; }
   .guess-bar-wrap { display: none; }
+  .flag-grid {
+    max-width: 270px; /* Smartphone view: compact size on Galaxy S21 Ultra and iPhone 14 Pro Max */
+  }
 }
 
 @media (max-width: 360px) {
   header { padding: 14px 12px 10px; }
   main { padding: 14px 12px 0; }
   .filter-wrap { padding: 10px 12px 0; }
+  .flag-grid {
+    max-width: 240px; /* Small screen devices */
+  }
 }

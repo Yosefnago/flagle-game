@@ -74,8 +74,10 @@
       <div class="guess-header">Guesses ({{ G.guesses.length }}/{{ MAX_GUESS }})</div>
       @for (guess of G.guesses.slice().reverse(); track guess.c.n) {
         <div class="guess-item" [class.correct]="guess.correct">
-          <span class="guess-flag">{{ guess.c.e }}</span>
-          <span class="guess-name">{{ guess.c.n }}</span>
+          @if (!guess.correct) {
+            <span class="guess-flag">{{ guess.c.e }}</span>
+          }
+          <span class="guess-name" [style.margin-left]="guess.correct ? '32px' : '0'">{{ guess.c.n }}</span>
           <div class="guess-meta">
             @if (guess.correct) {
               <span class="guess-dist" style="color:#22c55e">✓ Correct!</span>
@@ -90,9 +92,7 @@
 
   @if (resultVisible) {
     <div class="result-card visible" id="resultCard">
-      <div class="result-emoji" id="resultEmoji">{{ resultEmoji }}</div>
       <div class="result-title" id="resultTitle">{{ resultTitle }}</div>
-      <div class="result-sub" id="resultSub">{{ resultSub }}</div>
       <button class="next-btn" id="nextBtn" (click)="newRound()">Next Flag →</button>
     </div>
   }

@@ -41,9 +41,7 @@ export class App implements OnInit {
   }
   filteredCountries: Country[] = [];
   resultVisible = false;
-  resultEmoji = '🎉';
   resultTitle = '';
-  resultSub = '';
   toastVisible = false;
   toastMessage = '';
   avgGuessDisplay = '—';
@@ -223,14 +221,7 @@ export class App implements OnInit {
   private showResult(won: boolean): void {
     if (!this.G.target) return;
 
-    const attempts = this.G.guesses.length;
-    this.resultEmoji = won ? (attempts === 1 ? '🏆' : attempts <= 3 ? '🎉' : '✅') : '😔';
     this.resultTitle = won ? `${this.G.target.n} ${this.G.target.e}` : `The answer was: ${this.G.target.n} ${this.G.target.e}`;
-    this.resultSub = won
-      ? attempts === 1
-        ? 'First try! Incredible.'
-        : `Solved in ${attempts} guess${attempts > 1 ? 'es' : ''}!`
-      : 'Better luck next time!';
     this.resultVisible = true;
   }
 

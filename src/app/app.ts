@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { COUNTRIES as COUNTRY_DATA, type Country } from './app-data';
 
 type Guess = {
@@ -50,7 +50,14 @@ export class App implements OnInit {
   private deg2rad(d: number): number {
     return (d * Math.PI) / 180;
   }
-
+  
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.autocomplete-wrap')) {
+      this.closeAC();
+    }
+  }
   private haversine(a: number, b: number, c: number, d: number): number {
     const R = 6371;
     const dLat = this.deg2rad(c - a);

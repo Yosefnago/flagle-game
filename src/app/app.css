@@ -174,9 +174,15 @@ main {
 
 .tile-cover[data-col='0'] { left: 0; }
 .tile-cover[data-col='1'] { left: calc(100% / 3); }
-.tile-cover[data-col='2'] { left: calc(200% / 3); }
+.tile-cover[data-col='2'] { 
+  left: calc(200% / 3); 
+  width: calc(100% / 3 + 2px); /* eliminate sub-pixel gap on the right */
+}
 .tile-cover[data-row='0'] { top: 0; }
-.tile-cover[data-row='1'] { top: 50%; }
+.tile-cover[data-row='1'] { 
+  top: 50%; 
+  height: calc(50% + 2px); /* eliminate sub-pixel gap on the bottom */
+}
 .tile-cover.revealed {
   opacity: 0;
   transform: scale(0.9);
@@ -197,6 +203,7 @@ main {
 
 .autocomplete-wrap {
   position: relative;
+  z-index: 50; /* ensure suggestions float above the guess list elements below */
 }
 
 .input-row {
